@@ -8,6 +8,6 @@ enable_testing()
 
 include_directories(${GTEST_INCLUDE_DIR})
 
-add_executable(tests main.cpp variable.cpp)
+add_executable(tests main.cpp variable2.cpp)
 
 target_link_libraries(tests Variable_lib gtest Threads::Threads)
