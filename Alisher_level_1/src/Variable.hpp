@@ -31,7 +31,6 @@ namespace storage {
         Variable(const Variable &variable) : name_(variable.name_), type_(variable.type_), value_(variable.value_),
                                              memory_(variable.memory_) {}
 
-
         bool hasMember(const std::string &name);
 
         Variable &newMember(const std::string &name, const allType &value);
