@@ -62,6 +62,7 @@ namespace storage {
 
         void operator=(const allType &variable);
 
+        /// Test method for development
         void list() {
             std::map<std::string, Variable>::iterator it;
             for (it = memory_.begin(); it != memory_.end(); it++)
@@ -74,6 +75,7 @@ namespace storage {
         friend bool operator!=(const Variable &variable,
                                const allType &value);
 
+        /// Test method for development
         void printValue() {
             if (std::get_if<int>(&value_)) {
                 std::cout << std::get<int>(value_) << std::endl;
