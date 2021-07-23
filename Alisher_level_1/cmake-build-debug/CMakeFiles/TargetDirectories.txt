@@ -1,8 +1,0 @@
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/src/CMakeFiles/edit_cache.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/src/CMakeFiles/Variable_lib.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/test/CMakeFiles/edit_cache.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir
-/home/alexander/github/Alisher_lessons/Alisher_level_1/cmake-build-debug/test/CMakeFiles/tests.dir
