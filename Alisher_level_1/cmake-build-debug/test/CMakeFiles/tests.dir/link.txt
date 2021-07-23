@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/tests.dir/main.cpp.o CMakeFiles/tests.dir/variable.cpp.o -o tests  ../src/libVariable_lib.a -lgtest -lpthread 

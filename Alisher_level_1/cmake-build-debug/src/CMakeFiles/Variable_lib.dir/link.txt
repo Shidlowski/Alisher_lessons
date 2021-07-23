@@ -1,0 +1,2 @@
+/usr/bin/ar qc libVariable_lib.a CMakeFiles/Variable_lib.dir/Variable.cpp.o
+/usr/bin/ranlib libVariable_lib.a
