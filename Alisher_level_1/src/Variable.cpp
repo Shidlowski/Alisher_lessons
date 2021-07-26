@@ -6,6 +6,28 @@
 
 namespace storage {
 
+Variable::Type getType(const allType &value) {
+  if (std::get_if<int>(&value)) {
+    return Variable::Type::INT;
+  } else if (std::get_if<double>(&value)) {
+    return Variable::Type::DOUBLE;
+  } else if (std::get_if<bool>(&value)) {
+    return Variable::Type::BOOL;
+  } else if (std::get_if<std::string>(&value)) {
+    return Variable::Type::STRING;
+  } else if (std::get_if<std::vector<int>>(&value)) {
+    return Variable::Type::INT_ARRAY;
+  } else if (std::get_if<std::vector<double>>(&value)) {
+    return Variable::Type::DOUBLE_ARRAY;
+  } else if (std::get_if<std::vector<bool>>(&value)) {
+    return Variable::Type::BOOL_ARRAY;
+  } else if (std::get_if<std::vector<std::string>>(&value)) {
+    return Variable::Type::STRING_ARRAY;
+  } else {
+    return Variable::Type::NONE;
+  }
+}
+
 Variable &Variable::newMember(const std::string &name, const allType &value) {
   memory_.insert(std::make_pair(name, newVariable(name, value)));
   return memory_.at(name);
@@ -21,28 +43,6 @@ Variable Variable::newVariable(const std::string &name, const allType &value) {
   temp.type_ = getType(value);
   temp.value_ = value;
   return temp;
-}
-
-Variable::Type Variable::getType(const allType &value) {
-  if (std::get_if<int>(&value)) {
-    return Type::INT;
-  } else if (std::get_if<double>(&value)) {
-    return Type::DOUBLE;
-  } else if (std::get_if<bool>(&value)) {
-    return Type::BOOL;
-  } else if (std::get_if<std::string>(&value)) {
-    return Type::STRING;
-  } else if (std::get_if<std::vector<int>>(&value)) {
-    return Type::INT_ARRAY;
-  } else if (std::get_if<std::vector<double>>(&value)) {
-    return Type::DOUBLE_ARRAY;
-  } else if (std::get_if<std::vector<bool>>(&value)) {
-    return Type::BOOL_ARRAY;
-  } else if (std::get_if<std::vector<std::string>>(&value)) {
-    return Type::STRING_ARRAY;
-  } else {
-    return Type::NONE;
-  }
 }
 
 bool Variable::hasMember(const std::string &name_var) noexcept {
@@ -124,12 +124,16 @@ Variable &Variable::operator[](const std::string &name) {
   }
 }
 
-void Variable::operator=(const allType &variable) {
+Variable &Variable::operator=(const allType &variable) {
   if (getType(variable) == type_) {
     value_ = variable;
+  } else if (type_ == Type::NONE) {
+    value_ = variable;
+    type_ = getType(variable);
   } else {
     throw std::runtime_error("Types don't match");
   }
+  return *this;
 }
 
 const std::string &Variable::name() const noexcept {

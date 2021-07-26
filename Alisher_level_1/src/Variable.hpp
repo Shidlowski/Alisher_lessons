@@ -37,6 +37,10 @@ class Variable {
 
   Variable &operator=(const Variable &variable) = default;
 
+  Variable(Variable &&variable) noexcept = default;
+
+  Variable &operator=(Variable &&variable) noexcept = default;
+
   bool hasMember(const std::string &name) noexcept;
 
   Variable &newMember(const std::string &name, const allType &value);
@@ -65,7 +69,7 @@ class Variable {
 
   Variable &operator[](const std::string &name);
 
-  void operator=(const allType &variable);
+  Variable& operator=(const allType &variable);
 
   friend bool operator==(const Variable &variable, const allType &value) noexcept;
 
@@ -76,8 +80,6 @@ class Variable {
   std::string name_;
   allType value_;
   std::map<std::string, Variable> memory_;
-
-  Type getType(const allType &var);
 
   Variable newVariable(const std::string &name, const allType &value);
 
