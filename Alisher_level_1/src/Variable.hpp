@@ -2,8 +2,8 @@
 // Created by alexander on 6/1/21.
 //
 
-#ifndef UNTITLED_VARIABLE_HPP
-#define UNTITLED_VARIABLE_HPP
+#ifndef ALISHER_LEVEL_1_VARIABLE_HPP
+#define ALISHER_LEVEL_1_VARIABLE_HPP
 
 #include <string>
 #include <map>
@@ -11,96 +11,78 @@
 #include <vector>
 #include <iostream>
 
-typedef std::variant<int, double, bool, std::string, std::vector<int>, std::vector<double>, std::vector<bool>, std::vector<std::string>> allType;
+using allType = std::variant<int,
+                             double,
+                             bool,
+                             std::string,
+                             std::vector<int>,
+                             std::vector<double>,
+                             std::vector<bool>,
+                             std::vector<std::string>>;
 
 namespace storage {
 
-    class Variable {
+class Variable {
 
-    public:
-        enum class Type {
-            STRUCT, INT, DOUBLE, BOOL, STRING, INT_ARRAY, DOUBLE_ARRAY, BOOL_ARRAY, STRING_ARRAY, NONE
-        };
+ public:
+  enum class Type {
+    STRUCT, INT, DOUBLE, BOOL, STRING, INT_ARRAY, DOUBLE_ARRAY, BOOL_ARRAY, STRING_ARRAY, NONE
+  };
 
-        explicit Variable(const std::string &name, const Type &type) : name_(name), type_(type) {}
+  explicit Variable(const std::string &name, const Type &type = Type::NONE) : name_(name), type_(type) {}
 
-        explicit Variable(const std::string &name) : name_(name), type_(Type::NONE) {}
+  ~Variable() = default;
 
-        ~Variable() = default;
+  Variable(const Variable &variable) = default;
 
-        Variable(const Variable &variable) : name_(variable.name_), type_(variable.type_), value_(variable.value_),
-                                             memory_(variable.memory_) {}
+  Variable &operator=(const Variable &variable) = default;
 
-        bool hasMember(const std::string &name);
+  bool hasMember(const std::string &name) noexcept;
 
-        Variable &newMember(const std::string &name, const allType &value);
+  Variable &newMember(const std::string &name, const allType &value);
 
-        Variable &newMember(const Variable &variable);
+  Variable &newMember(const Variable &variable);
 
-        std::string name();
+  const std::string &name() const noexcept;
 
-        Type type();
+  Type type() const noexcept;
 
-        int asInt();
+  int asInt();
 
-        double asDouble();
+  double asDouble();
 
-        bool asBool();
+  bool asBool();
 
-        std::string asString();
+  std::string asString();
 
-        std::vector<int> asIntArray();
+  std::vector<int> asIntArray();
 
-        std::vector<double> asDoubleArray();
+  std::vector<double> asDoubleArray();
 
-        std::vector<bool> asBoolArray();
+  std::vector<bool> asBoolArray();
 
-        std::vector<std::string> asStringArray();
+  std::vector<std::string> asStringArray();
 
-        Variable &operator[](const std::string &name);
+  Variable &operator[](const std::string &name);
 
-        void operator=(const allType &variable);
+  void operator=(const allType &variable);
 
-        /// Test method for development
-        void list() {
-            std::map<std::string, Variable>::iterator it;
-            for (it = memory_.begin(); it != memory_.end(); it++)
-                std::cout << it->first << ' ' << '\n';
-        }
+  friend bool operator==(const Variable &variable, const allType &value) noexcept;
 
-        friend bool operator==(const Variable &variable,
-                               const allType &value);
+  friend bool operator!=(const Variable &variable, const allType &value) noexcept;
 
-        friend bool operator!=(const Variable &variable,
-                               const allType &value);
+ private:
+  Type type_;
+  std::string name_;
+  allType value_;
+  std::map<std::string, Variable> memory_;
 
-        /// Test method for development
-        void printValue() {
-            if (std::get_if<int>(&value_)) {
-                std::cout << std::get<int>(value_) << std::endl;
-            } else if (std::get_if<double>(&value_)) {
-                std::cout << std::get<double>(value_) << std::endl;
-            } else if (std::get_if<bool>(&value_)) {
-                std::cout << std::get<bool>(value_) << std::endl;
-            } else if (std::get_if<std::string>(&value_)) {
-                std::cout << std::get<std::string>(value_) << std::endl;
-            } else
-                std::cout << "NOT FOUND" << std::endl;
-        }
+  Type getType(const allType &var);
 
-    private:
-        Type type_;
-        std::string name_;
-        allType value_;
-        std::map<std::string, Variable> memory_;
+  Variable newVariable(const std::string &name, const allType &value);
 
-        Type getType(const allType &var);
-
-        Variable newVariable(const std::string &name, const allType &value);
-
-    };
+};
 
 }
 
-
-#endif //UNTITLED_VARIABLE_HPP
+#endif //ALISHER_LEVEL_1_VARIABLE_HPP
