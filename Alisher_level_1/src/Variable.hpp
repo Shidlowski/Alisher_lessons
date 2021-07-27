@@ -31,6 +31,8 @@ class Variable {
 
   explicit Variable(const std::string &name, const Type &type = Type::NONE) : name_(name), type_(type) {}
 
+  explicit Variable(const std::string &name, const allType &value);
+
   ~Variable() = default;
 
   Variable(const Variable &variable) = default;
@@ -51,25 +53,25 @@ class Variable {
 
   Type type() const noexcept;
 
-  int asInt();
+  int asInt() const;
 
-  double asDouble();
+  double asDouble() const;
 
-  bool asBool();
+  bool asBool() const;
 
-  std::string asString();
+  std::string asString() const;
 
-  std::vector<int> asIntArray();
+  std::vector<int> asIntArray() const;
 
-  std::vector<double> asDoubleArray();
+  std::vector<double> asDoubleArray() const;
 
-  std::vector<bool> asBoolArray();
+  std::vector<bool> asBoolArray() const;
 
-  std::vector<std::string> asStringArray();
+  std::vector<std::string> asStringArray() const;
 
   Variable &operator[](const std::string &name);
 
-  Variable& operator=(const allType &variable);
+  Variable &operator=(const allType &variable);
 
   friend bool operator==(const Variable &variable, const allType &value) noexcept;
 
@@ -80,8 +82,6 @@ class Variable {
   std::string name_;
   allType value_;
   std::map<std::string, Variable> memory_;
-
-  Variable newVariable(const std::string &name, const allType &value);
 
 };
 
