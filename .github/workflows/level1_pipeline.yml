@@ -20,6 +20,9 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v2
 
+      - name: Instal GTest
+        run: sudo apt-get install libgtest-dev
+
       - name: Build project
         run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
 
@@ -31,8 +34,11 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v2
 
+      - name: Instal GTest
+        run: sudo apt-get install libgtest-dev
+
       - name: Build project
         run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
 
       - name: Test project
-        run: cd test/ && ./tests
+        run: cd Alisher_level_1/build/test/ && ./tests
