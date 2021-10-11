@@ -4,7 +4,7 @@
 # Copyleft (c) by Alexander Shidlovsky 2021.
 # ------------------------------------------
 
-name: level1_pipeline
+name: level1_test
 
 on:
   push:
@@ -15,7 +15,6 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    needs: [build]
     steps:
       - name: Git clone repo
         uses: actions/checkout@v2

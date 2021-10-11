@@ -4,7 +4,7 @@
 # Copyleft (c) by Alexander Shidlovsky 2021.
 # ------------------------------------------
 
-name: level1_pipeline
+name: level1_build
 
 on:
   push:
