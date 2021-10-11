@@ -20,11 +20,9 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v2
 
-      - name: Check files
-        run: ls -la
-
       - name: Build project
-        run: echo Hello, world!
+        run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
+
 
   tests:
     runs-on: ubuntu-latest
@@ -33,15 +31,8 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v2
 
+      - name: Build project
+        run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
+
       - name: Test project
-        run: echo Hello, world!
-
-  run:
-    runs-on: ubuntu-latest
-    needs: [tests]
-    steps:
-      - name: Git clone repo
-        uses: actions/checkout@v2
-
-      - name: Run project
-        run: echo Hello, world!
+        run: cd test/ && ./tests
