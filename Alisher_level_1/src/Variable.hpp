@@ -83,6 +83,8 @@ class Variable {
   allType value_;
   std::map<std::string, Variable> memory_;
 
+  Variable newVariable(const std::string &name, const allType &value);
+
 };
 
 }
