@@ -23,7 +23,7 @@ jobs:
         run: sudo apt-get install libgtest-dev
 
       - name: Build project
-        run: cd Alisher_level_2/ && mkdir build && cd build && cmake .. && make
+        run: cd Alisher_level_2/istorage && mkdir build && cd build && cmake .. && make
 
       - name: Test project
-        run: cd Alisher_level_2/build/test/ && ./tests
+        run: cd Alisher_level_2/istorag/build/test/ && ./tests
