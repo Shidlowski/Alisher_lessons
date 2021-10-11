@@ -1,0 +1,27 @@
+# ------------------------------------------
+# Action for Alisher lesson one
+#
+# Copyleft (c) by Alexander Shidlovsky 2021.
+# ------------------------------------------
+
+name: level1_pipeline
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Git clone repo
+        uses: actions/checkout@v2
+
+      - name: Instal GTest
+        run: sudo apt-get install libgtest-dev
+
+      - name: Build project
+        run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
