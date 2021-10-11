@@ -29,7 +29,7 @@ Variable::Type getType(const allType &value) {
 }
 
 Variable &Variable::newMember(const std::string &name, const allType &value) {
-  memory_.insert(std::make_pair(name, Variable(name, value)));
+  memory_.insert(std::make_pair(name, newVariable(name, value)));
   return memory_.at(name);
 }
 
@@ -38,10 +38,11 @@ Variable &Variable::newMember(const Variable &variable) {
   return memory_.at(variable.name_);
 }
 
-Variable::Variable(const std::string &name, const allType &value) {
+Variable Variable::newVariable(const std::string &name, const allType &value) {
   Variable temp(name);
   temp.type_ = getType(value);
   temp.value_ = value;
+  return temp;
 }
 
 bool Variable::hasMember(const std::string &name_var) noexcept {
@@ -49,7 +50,7 @@ bool Variable::hasMember(const std::string &name_var) noexcept {
 }
 
 //get cast type variable
-int Variable::asInt() const{
+int Variable::asInt() const {
   if (type_ == Type::INT) {
     return std::get<int>(value_);
   } else {
@@ -57,7 +58,7 @@ int Variable::asInt() const{
   }
 }
 
-double Variable::asDouble() const{
+double Variable::asDouble() const {
   if (type_ == Type::DOUBLE) {
     return std::get<double>(value_);
   } else {
@@ -65,7 +66,7 @@ double Variable::asDouble() const{
   }
 }
 
-bool Variable::asBool() const{
+bool Variable::asBool() const {
   if (type_ == Type::BOOL) {
     return std::get<bool>(value_);
   } else {
@@ -73,7 +74,7 @@ bool Variable::asBool() const{
   }
 }
 
-std::string Variable::asString() const{
+std::string Variable::asString() const {
   if (type_ == Type::STRING) {
     return std::get<std::string>(value_);
   } else {
@@ -82,7 +83,7 @@ std::string Variable::asString() const{
 }
 
 //get cast array type variable
-std::vector<int> Variable::asIntArray() const{
+std::vector<int> Variable::asIntArray() const {
   if (type_ == Type::INT_ARRAY) {
     return std::get<std::vector<int>>(value_);
   } else {
@@ -90,7 +91,7 @@ std::vector<int> Variable::asIntArray() const{
   }
 }
 
-std::vector<double> Variable::asDoubleArray() const{
+std::vector<double> Variable::asDoubleArray() const {
   if (type_ == Type::DOUBLE_ARRAY) {
     return std::get<std::vector<double>>(value_);
   } else {
@@ -98,7 +99,7 @@ std::vector<double> Variable::asDoubleArray() const{
   }
 }
 
-std::vector<bool> Variable::asBoolArray() const{
+std::vector<bool> Variable::asBoolArray() const {
   if (type_ == Type::BOOL_ARRAY) {
     return std::get<std::vector<bool>>(value_);
   } else {
@@ -106,7 +107,7 @@ std::vector<bool> Variable::asBoolArray() const{
   }
 }
 
-std::vector<std::string> Variable::asStringArray() const{
+std::vector<std::string> Variable::asStringArray() const {
   if (type_ == Type::STRING_ARRAY) {
     return std::get<std::vector<std::string>>(value_);
   } else {
