@@ -4,7 +4,7 @@
 # Copyleft (c) by Alexander Shidlovsky 2021.
 # ------------------------------------------
 
-name: level1_test
+name: level2_test
 
 on:
   push:
