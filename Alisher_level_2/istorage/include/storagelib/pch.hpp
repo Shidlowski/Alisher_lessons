@@ -5,7 +5,7 @@ namespace storagelib {
 
 template<typename T>
 struct has_open {
-/*  typedef void(T::*P)(void);
+ typedef void(T::*P)(void);
 
   template<class U, P = &U::open_impl>
   struct True { char dummy[2]; };
@@ -14,7 +14,7 @@ struct has_open {
   template<class U>
   static True<U> detect(U *);
 
-  static const bool v = (sizeof(False) != sizeof(detect(static_cast<T *>(0))));*/
+  static const bool v = (sizeof(False) != sizeof(detect(static_cast<T *>(0))));
 
 };
 
@@ -50,8 +50,8 @@ class Bar {};
 
 class Foo {
  public:
-//  void open_impl();
-  void open_impl(const std::string uri);
+  void open_impl();
+//  void open_impl(const std::string uri);
   void write_impl();
   void close_impl();
 };
