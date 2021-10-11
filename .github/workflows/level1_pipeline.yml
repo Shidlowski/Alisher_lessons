@@ -20,6 +20,9 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v2
 
+      - name: Check files
+        run: ls -la
+
       - name: Build project
         run: echo Hello, world!
 
