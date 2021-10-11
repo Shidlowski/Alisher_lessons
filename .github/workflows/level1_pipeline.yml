@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Instal GTest
-        run: apt-get install libgtest-dev
+        run: sudo apt-get install libgtest-dev
 
       - name: Build project
         run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Instal GTest
-        run: apt-get install libgtest-dev
+        run: sudo apt-get install libgtest-dev
 
       - name: Build project
         run: cd Alisher_level_1/ && mkdir build && cd build && cmake .. && make
