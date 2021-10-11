@@ -20,7 +20,7 @@ using allType = std::variant<int,
                              std::vector<bool>,
                              std::vector<std::string>>;
 
-namespace storage {
+namespace storagelib {
 
 class Variable {
 

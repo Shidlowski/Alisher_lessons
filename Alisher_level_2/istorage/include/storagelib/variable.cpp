@@ -2,9 +2,9 @@
 // Created by alexander on 6/1/21.
 //
 
-#include "Variable.hpp"
+#include "variable.hpp"
 
-namespace storage {
+namespace storagelib {
 
 Variable::Type getType(const allType &value) {
   if (std::get_if<int>(&value)) {
