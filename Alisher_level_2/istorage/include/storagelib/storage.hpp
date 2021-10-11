@@ -34,14 +34,14 @@ class IStorage {
 
   void open(const std::optional<Uri> uri = std::nullopt) {
 
-    static_cast<Storage*>(this)->open_impl(uri);
+//    static_cast<Storage*>(this)->open_impl(uri);
 
     ///????
-    static_assert(has_open<Storage>::v, "storage class requires any open implementation");
+//    static_assert(has_open<Storage>::v, "storage class requires any open implementation");
   };
 
   void close() {
-    static_assert(has_close<Storage>::v, "storage class requires any close implementation");
+//    static_assert(has_close<Storage>::v, "storage class requires any close implementation");
    ////????
   };
 
