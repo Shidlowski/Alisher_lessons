@@ -1,49 +1,41 @@
 #ifndef ISTORAGE_INCLUDE_STORAGELIB_PCH_HPP_
 #define ISTORAGE_INCLUDE_STORAGELIB_PCH_HPP_
 
+#define CHECK_FUNC(func_name, template_name)                                    \
+  template<typename C, typename = std::true_type>                               \
+  struct has_member_func : std::false_type {};                                  \
+                                                                                \
+  template<typename C, typename = void>                                         \
+  struct got_type : std::false_type {};                                         \
+                                                                                \
+  template<typename C>                                                          \
+  struct got_type<C> : std::true_type {                                         \
+    typedef C type;                                                             \
+  };                                                                            \
+                                                                                \
+  template<typename C>                                                          \
+  struct has_member_func<C,                                                     \
+    std::integral_constant<bool,                                                \
+    got_type<decltype(&C::open_impl)>::value>>:                                 \
+    std::true_type {};                                                          \
+                                                                                \
+  static const bool v = has_member_func<template_name>::value;
+
 namespace storagelib {
 
 template<typename T>
 struct has_open {
- typedef void(T::*P)(void);
-
-  template<class U, P = &U::open_impl>
-  struct True { char dummy[2]; };
-  typedef char False;
-  static False detect(...);
-  template<class U>
-  static True<U> detect(U *);
-
-  static const bool v = (sizeof(False) != sizeof(detect(static_cast<T *>(0))));
-
+  CHECK_FUNC(open_impl, T);
 };
 
 template<typename T>
 struct has_close {
-  typedef void(T::*P)(void);
-
-  template<class U, P = &U::close_impl>
-  struct True { char dummy[2]; };
-  typedef char False;
-  static False detect(...);
-  template<class U>
-  static True<U> detect(U *);
-
-  static const bool v = (sizeof(False) != sizeof(detect(static_cast<T *>(0))));
+  CHECK_FUNC(close_impl, T);
 };
 
 template<typename T>
 struct has_write {
-  typedef void(T::*P)(void);
-
-  template<class U, P = &U::write_impl>
-  struct True { char dummy[2]; };
-  typedef char False;
-  static False detect(...);
-  template<class U>
-  static True<U> detect(U *);
-
-  static const bool v = (sizeof(False) != sizeof(detect(static_cast<T *>(0))));
+  CHECK_FUNC(write_impl, T);
 };
 
 class Bar {};
@@ -51,7 +43,6 @@ class Bar {};
 class Foo {
  public:
   void open_impl();
-//  void open_impl(const std::string uri);
   void write_impl();
   void close_impl();
 };
